@@ -1,1 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --color-light-text: #6e7191;
+  --color-primary: #1d4ed8;
+  --font-mulish: "Mulish", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-nunito: "Nunito", sans-serif;
+  --color-overlay: rgba(0, 0, 0, 0.7);
+  --shadow-button: 0 4px 10px rgba(0, 0, 0, 0.2);
+  --breakpoint-lg: 992px;
+}
+
+@layer base {
+  button {
+    @apply cursor-pointer select-none;
+  }
+  body {
+    @apply bg-[#A0A3BD33];
+  }
+  section {
+    @apply py-[2rem] px-[7%] bg-white font-mulish;
+  }
+}
+
+@layer components {
+  form {
+    h3 {
+      @apply text-base text-[#14142B] leading-[28px] tracking-[0.75px] pb-[8px] border-b border-[#dedede] mt-[18px] mb-[12px];
+    }
+    label {
+      @apply text-base text-[#4E4B66] leading-[100%];
+    }
+    input {
+      @apply py-[12px] px-[24px] text-sm text-[#4E4B66] border-[#DEDEDE] rounded-xl border w-full mt-[12px] outline-0;
+    }
+    p {
+      @apply text-red-400 my-0.5 invisible;
+    }
+  }
+}

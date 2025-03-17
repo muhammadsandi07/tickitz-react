@@ -1,11 +1,12 @@
 import getGenre from "./apiGenre.js"
 
 const url = "https://api.themoviedb.org/3/movie/popular"
+const API_KEY = import.meta.env.VITE_API_KEY
 
 const options = {
   method: "GET",
   headers: {
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZWUzNzg1YTRjZGI5MTIyMzQ2ZjI1OTRlZjZjODk2MiIsIm5iZiI6MTc0MTA5OTMyNy41MDQsInN1YiI6IjY3YzcxMTNmYzczZjE5OWY2YTkwODVmMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qlby1wwd_KrXolAztTVZ2l4WoAmiXb7iVhI25BSSvsU`,
+    Authorization: `Bearer e${API_KEY}`,
 
     accept: "application/json",
   },
@@ -13,11 +14,12 @@ const options = {
 
 const getUpcoming = async () => {
   try {
-    const response = await fetch(url, options)
-    if (!response.ok) throw new Error("data tidak tersedia")
-    const data = await response.json()
-    const listGenre = await getGenre()
-
+    const [responseUpcoming, listGenre] = await Promise.all([
+      fetch(url, options),
+      getGenre(),
+    ])
+    if (!responseUpcoming.ok) throw new Error("data tidak tersedia")
+    const data = await responseUpcoming.json()
     const newData = data.results.map(
       ({ id, poster_path, title, genre_ids, release_date }) => {
         const newGenre = []

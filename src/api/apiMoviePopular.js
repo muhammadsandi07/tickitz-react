@@ -1,20 +1,23 @@
 import getGenre from "./apiGenre.js"
 
 const url = "https://api.themoviedb.org/3/movie/popular"
+const API_KEY = import.meta.env.VITE_API_KEY
+
 const options = {
   method: "GET",
   headers: {
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZWUzNzg1YTRjZGI5MTIyMzQ2ZjI1OTRlZjZjODk2MiIsIm5iZiI6MTc0MTA5OTMyNy41MDQsInN1YiI6IjY3YzcxMTNmYzczZjE5OWY2YTkwODVmMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qlby1wwd_KrXolAztTVZ2l4WoAmiXb7iVhI25BSSvsU`,
-
+    Authorization: `Bearer ${API_KEY}`,
     accept: "application/json",
   },
 }
 
 const getMoviePopular = async () => {
   try {
-    const response = await fetch(url, options)
+    const [response, listGenre] = await Promise.all([
+      fetch(url, options),
+      getGenre(),
+    ])
     const data = await response.json()
-    const listGenre = await getGenre()
     const newData = data?.results?.map(
       ({ id, poster_path, title, genre_ids }) => {
         const newGenre = []

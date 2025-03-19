@@ -1,12 +1,10 @@
 import getGenre from "./apiGenre.js"
 
-// const API_KEY = import.meta.env.VITE_API_KEY
-const api =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZWUzNzg1YTRjZGI5MTIyMzQ2ZjI1OTRlZjZjODk2MiIsIm5iZiI6MTc0MTA5OTMyNy41MDQsInN1YiI6IjY3YzcxMTNmYzczZjE5OWY2YTkwODVmMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qlby1wwd_KrXolAztTVZ2l4WoAmiXb7iVhI25BSSvsU"
+const API_KEY = import.meta.env.VITE_API_KEY
 const options = {
   method: "GET",
   headers: {
-    Authorization: `Bearer ${api}`,
+    Authorization: `Bearer ${API_KEY}`,
 
     accept: "application/json",
   },
@@ -14,41 +12,52 @@ const options = {
 
 const getMovieDetails = async (id) => {
   try {
-    const responseDetails = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}`,
-      options
-    )
+    const dataMovie = {
+      title: "",
+      background: "",
+      img: "",
+      releaseDate: "",
+      duration: {
+        hour: 0,
+        minute: 0,
+      },
+      cast: "",
+      genre: [],
+      director: "",
+    }
+    const [responseDetails, responseCredits] = await Promise.all([
+      fetch(`https://api.themoviedb.org/3/movie/${id}`, options),
+      fetch(`https://api.themoviedb.org/3/movie/${id}/credits`, options),
+    ])
+
     const dataDetails = await responseDetails.json()
-    const responseCredits = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}/credits`,
-      options
-    )
     const dataCredits = await responseCredits.json()
-    const listGenre = await getGenre()
+    const { title, backdrop_path, poster_path, release_date, runtime, genres } =
+      dataDetails
+    dataMovie.title = title
+    dataMovie.background = backdrop_path
+    dataMovie.img = poster_path
+    dataMovie.duration.hour = Math.floor(runtime / 60)
+    dataMovie.duration.minute = runtime - dataMovie.duration.hour * 60
+    dataMovie.genre = genres
 
-    console.log("ini data details", dataDetails)
-    console.log("ini data credits", dataCredits)
+    for (let index = 0; index < dataCredits.cast.length; index++) {
+      if (index > 2) {
+        dataMovie.cast += dataCredits.crew[index].name + ", "
+        dataMovie.cast += "..."
+        break
+      }
+      dataMovie.cast += dataCredits.crew[index].name + ", "
+    }
+    dataMovie.director = dataCredits.crew
+      .filter((pekerja) => pekerja.job === "Director")
+      .map((pekerja) => pekerja.name)
+      .join(", ")
 
-    // const newData = data?.results?.map(
-    //   ({ id, poster_path, title, genre_ids }) => {
-    //     const newGenre = []
-    //     for (let index = 0; index < genre_ids.length; index++) {
-    //       if (index > 1) {
-    //         newGenre.push(listGenre.get(genre_ids[index]))
-    //         newGenre.push("more...")
-    //         break
-    //       }
-    //       newGenre.push(listGenre.get(genre_ids[index]))
-    //     }
-    //     return { id, poster_path, title, genre: newGenre }
-    //   }
-    // )
-    // return newData
+    return dataMovie
   } catch (error) {
     console.log(error)
   }
 }
 
 export default getMovieDetails
-
-getMovieDetails(1286773)

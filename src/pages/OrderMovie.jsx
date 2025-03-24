@@ -12,7 +12,22 @@ const OrderMovie = () => {
   const [newForm, setNewForm] = useState({
     seat: [],
   })
-  const seatChoosed = newForm.seat?.sort().join(", ")
+  const seatChoosed = newForm.seat
+    ?.sort((a, b) => {
+      const hurufDataPertama = a.slice(0, 1)
+      const hurufDataKedua = b.slice(0, 1)
+      const angkaDataPertama = a.slice(1)
+      const angkaDataKedua = b.slice(1)
+
+      if (hurufDataPertama > hurufDataKedua) {
+        return 1
+      } else if (hurufDataPertama < hurufDataKedua) {
+        return -1
+      } else {
+        return angkaDataPertama - angkaDataKedua
+      }
+    })
+    .join(", ")
 
   const row = [
     "1",

@@ -1,3 +1,4 @@
+import formatterDate from "../utils/formatterDate.js"
 import getGenre from "./apiGenre.js"
 
 const url = "https://api.themoviedb.org/3/movie/popular"
@@ -31,23 +32,7 @@ const getUpcoming = async () => {
           }
           newGenre.push(listGenre.get(genre_ids[index]))
         }
-        const dates = new Date(release_date)
-        const montsList = [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ]
-        const month = montsList[dates.getMonth()]
-        const year = dates.getFullYear()
+        const { month, year } = formatterDate(release_date)
         const newDate = `${month} ${year}`
 
         return { id, poster_path, title, genre: newGenre, newDate }

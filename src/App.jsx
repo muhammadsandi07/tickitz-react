@@ -1,20 +1,26 @@
 import { useState } from "react"
 import reactLogo from "./assets/react.svg"
 import viteLogo from "/vite.svg"
-import "./index.css"
-import ProfilePage from "./pages/ProfilePage"
-import OrderHistory from "./pages/ProfilePage"
 import { Routes, Route, Outlet } from "react-router"
-import LandingPage from "./pages/LandingPage"
-import Hero from "./components/movie/Hero"
-import MovieAll from "./components/movie/MovieAll"
-import History from "./components/history/History"
-import FormProfile from "./components/form-profile/FormProfile"
-import Auth from "./pages/Auth"
-import SignIn from "./components/auth/SignIn"
-import SignUp from "./components/auth/SignUp"
-import MovieDetails from "./components/movie/MovieDetails"
-import OrderPage from "./pages/OrderPage"
+import "./index.css"
+import OrderHistory from "./layout/ProfileLayout"
+import LandingPage from "./layout/LandingPage"
+import Hero from "./pages/Hero"
+import MovieAll from "./pages/MovieAll"
+import Auth from "./layout/Auth"
+import SignIn from "./pages/SignIn"
+import SignUp from "./pages/SignUp"
+import MovieDetails from "./pages/MovieDetails"
+import OrderPage from "./layout/OrderPage"
+import PrivateRoute from "./components/PrivateRoute"
+import OrderMovie from "./pages/OrderMovie"
+import Payment from "./components/order/Payment"
+import TicketResult from "./components/order/TicketResult"
+import ProfileLayout from "./layout/ProfileLayout"
+import ProfilePage from "./pages/ProfilePage"
+import ProfileHistory from "./pages/ProfileHistory"
+import DashboardAdmin from "./pages/DashboardAdmin"
+import AddMovie from "./pages/AddMovie"
 function App() {
   return (
     <Routes>
@@ -22,24 +28,32 @@ function App() {
         <Route index element={<Hero />} />
         <Route path='movies'>
           <Route index element={<MovieAll />} />
-          <Route path=':id' element={<MovieDetails />} />
+          <Route
+            path=':id'
+            element={
+              <PrivateRoute redirectTo={"/auth"}>
+                <MovieDetails />
+              </PrivateRoute>
+            }
+          />
         </Route>
-      </Route>
-      <Route path='profile' element={<OrderHistory />}>
-        <Route path='edit' element={<FormProfile />} />
-        <Route path='history' element={<ProfilePage />} />
       </Route>
       <Route path='auth' element={<Auth />}>
         <Route index element={<SignIn />} />
         <Route path='new' element={<SignUp />} />
       </Route>
-      <Route path='profile' element={<ProfilePage />}>
-        <Route index element={<FormProfile />} />
-        <Route path='history' element={<History />} />
-      </Route>
       <Route path='order' element={<OrderPage />}>
-        <Route index element={<FormProfile />} />
-        <Route path='history' element={<History />} />
+        <Route index element={<OrderMovie />} />
+        <Route path='payment' element={<Payment />} />
+        <Route path='ticket' element={<TicketResult />} />
+      </Route>
+      <Route path='profile' element={<ProfileLayout />}>
+        <Route index element={<ProfilePage />} />
+        <Route path='history-order' element={<ProfileHistory />} />
+      </Route>
+      <Route path='admin' element={<ProfileLayout />}>
+        <Route index element={<DashboardAdmin />} />
+        <Route path='add-movie' element={<AddMovie />} />
       </Route>
     </Routes>
   )

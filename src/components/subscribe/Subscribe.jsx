@@ -7,14 +7,14 @@ const Subscribe = () => {
         <h2 className='max-sm:text-[32px] sm:text-[48px] mb-[37px] text-white text-center max-sm:mb-[37px]'>
           Subcribe to our newslater
         </h2>
-        <form className='flex max-sm:flex-col gap-[11px] items-end mt-[37px] p-0  mb-[20px] justify-center'>
+        <form className='flex max-lg:flex-col gap-[11px] items-end mt-[37px] p-0  mb-[20px] justify-center'>
           <label htmlFor='firstname' hidden></label>
           <input
             type='text'
             name='firstname'
             id='firstname'
             placeholder='First name'
-            className='rounded-[5px] leading-[26px] placeholder:text-white py-[16px] px-[12px] mt-0 mb-0 sm:w-[230px]'
+            className='rounded-[5px] leading-[26px] placeholder:text-white py-[16px] px-[12px] mt-0 mb-0 lg:w-[230px]'
           />
           <label htmlFor='email' hidden></label>
           <input
@@ -22,9 +22,9 @@ const Subscribe = () => {
             name='email'
             id='email'
             placeholder='Last name'
-            className='rounded-[5px] leading-[26px] placeholder:text-white py-[16px] px-[12px] mt-0 mb-0 sm:w-[230px]'
+            className='rounded-[5px] leading-[26px] placeholder:text-white py-[16px] px-[12px] mt-0 mb-0 lg:w-[230px]'
           />
-          <button className='w-full rounded-[5px] text-primary font-bold text-lg bg-white py-[16px] px-[12px] sm:w-[220px]'>
+          <button className='w-full rounded-[5px] text-primary font-bold text-lg bg-white py-[16px] px-[12px] lg:w-[220px]'>
             subcribe now
           </button>
         </form>

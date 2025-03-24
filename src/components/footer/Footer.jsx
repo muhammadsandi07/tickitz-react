@@ -12,7 +12,7 @@ import "../../index.css"
 
 const Footer = () => {
   return (
-    <footer className='text-light-text  px-16 py-8 max-h-max bg-white'>
+    <footer className='text-light-text py-[32px] px-[7%] max-h-max  bg-white'>
       <div className='md:flex gap-x-[24px]'>
         <div className='mb-[40px] md: flex-1 ]'>
           <img

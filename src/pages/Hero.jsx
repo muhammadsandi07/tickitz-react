@@ -133,10 +133,10 @@ const Hero = () => {
           </div>
         </section>
         <section className='movies'>
-          <h3 className='mb-14px text-primary leading-[34px] tracking-[0.75px] font-bold text-lg'>
+          <h3 className='mb-[14px] text-primary leading-[34px] tracking-[0.75px] font-bold text-lg max-sm:text-center'>
             MOVIES
           </h3>
-          <h2 className='text-[32px] leading-[45px] tracking-[1px] text-[#121212] mb-[28px]'>
+          <h2 className='text-[32px] leading-[45px] tracking-[1px] text-[#121212] mb-[28px] max-sm:text-center'>
             Exciting Movies That Should Be Watched Today
           </h2>
           <div className=' '>
@@ -165,10 +165,10 @@ const Hero = () => {
         <section className='movies-up-coming'>
           <div className='flex items-center justify-between'>
             <div>
-              <h3 className='mb-14px text-primary leading-[34px] tracking-[0.75px] font-bold text-lg'>
+              <h3 className='mb-[14px] text-primary leading-[34px] tracking-[0.75px] font-bold text-lg max-sm:text-center'>
                 UPCOMING MOVIES
               </h3>
-              <h2 className='text-[32px] leading-[45px] tracking-[1px] text-[#121212] mb-[28px]'>
+              <h2 className='text-[32px] leading-[45px] tracking-[1px] text-[#121212] mb-[28px] max-sm:text-center'>
                 Exciting Movies That Should Be Watched Today
               </h2>
             </div>

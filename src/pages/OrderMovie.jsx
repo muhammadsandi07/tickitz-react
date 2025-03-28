@@ -74,7 +74,7 @@ const OrderMovie = () => {
         </div>
       </section>
       <div className='flex gap-4 flex-wrap'>
-        <section className='bg-white max-md:rounded-2xl rounded-md px-[12px] py-[13px] flex-1/2 shrink'>
+        <section className='bg-white max-md:rounded-2xl rounded-md px-[12px] py-[13px] max-md:w-full md:flex-1/2 shrink '>
           <div className='border border-[#dedede] px-[14px] py-[17px] rounded-lg flex flex-col justify-center items-center md:flex-row md:justify-start '>
             <img
               src={`${
@@ -113,121 +113,127 @@ const OrderMovie = () => {
               Choose Your seat
             </h3>
             <div>
-              <div className='flex justify-center overflow-x-scroll'>
-                <div className='flex flex-col '>
-                  {column.map((column, index) => (
-                    <div
-                      key={index}
-                      className='w-[26px] h-[26px] mx-2 my-2 rounded-sm  '
-                    >
-                      {column}
-                    </div>
-                  ))}
-                </div>
-                <div className='flex gap-[72px] '>
-                  <div className=''>
-                    {column.map((column, index) => (
-                      <div key={index}>
-                        <div className='flex'>
-                          <div className='flex '>
-                            {row.map((row, index) => (
-                              <div className='flex' key={index}>
-                                {index < 7 && (
-                                  <div
-                                    className={`${
-                                      newForm.seat.includes(`${column}${row}`)
-                                        ? "bg-primary"
-                                        : "bg-[#D6D8E7]"
-                                    } w-[26px] h-[26px] mx-2 my-2 rounded-sm `}
-                                    onClick={() =>
-                                      setNewForm((form) => {
-                                        let newSeat = []
-                                        const checkSeat = form.seat?.includes(
-                                          `${column}${row}`
-                                        )
-                                        if (checkSeat) {
-                                          newSeat = form.seat.filter(
-                                            (seat) => seat !== `${column}${row}`
-                                          )
-                                        } else {
-                                          newSeat = [
-                                            ...form.seat,
-                                            `${column}${row}`,
-                                          ]
-                                        }
-                                        return { ...form, seat: newSeat }
-                                      })
-                                    }
-                                  ></div>
-                                )}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
+              <div className='mb-2 mx-4'>
+                <p className='text-center max-sm:hidden'>Screen</p>
+                <div className='bg-[#9570FE] rounded-[3px] h-[6px] sm:hidden'></div>
+              </div>
 
-                    {/* <div className='flex '>
-                      {row.map((row, index) => (
-                        <div className='flex' key={index}>
-                          {index < 7 && (
-                            <div className='w-[26px] h-[26px] mx-2 my-2 rounded-sm flex justify-center items-center'>
-                              {row}
+              <div>
+                <div className='flex '>
+                  <div className=' h-[280px] w-[4px] border-r-2 border-[#00BA88] sm:hidden mr-2'></div>
+                  <div className='flex flex-col mt-[26px] '>
+                    {column.map((column, index) => (
+                      <>
+                        <div
+                          key={index}
+                          className='w-[26px] h-[26px] mx-2 my-2 rounded-sm max-sm:hidden'
+                        >
+                          {column}
+                        </div>
+                      </>
+                    ))}
+                  </div>
+                  <div className='flex overflow-scroll gap-10 pb-2.5'>
+                    <div className='mt-[26px]'>
+                      {column.map((column, index) => (
+                        <div className='flex'>
+                          {row.map((row, index) => (
+                            <div className=''>
+                              {index < 7 && (
+                                <div
+                                  className={`${
+                                    newForm.seat.includes(`${column}${row}`)
+                                      ? "bg-primary"
+                                      : "bg-[#D6D8E7]"
+                                  } w-[26px] h-[26px] mx-2 my-2 rounded-sm `}
+                                  onClick={() =>
+                                    setNewForm((form) => {
+                                      let newSeat = []
+                                      const checkSeat = form.seat?.includes(
+                                        `${column}${row}`
+                                      )
+                                      if (checkSeat) {
+                                        newSeat = form.seat.filter(
+                                          (seat) => seat !== `${column}${row}`
+                                        )
+                                      } else {
+                                        newSeat = [
+                                          ...form.seat,
+                                          `${column}${row}`,
+                                        ]
+                                      }
+                                      return { ...form, seat: newSeat }
+                                    })
+                                  }
+                                ></div>
+                              )}
                             </div>
-                          )}
+                          ))}
                         </div>
                       ))}
-                    </div> */}
-                  </div>
-
-                  <div>
-                    {column.map((column, index) => (
-                      <div className='flex ' key={index}>
+                      <div className='flex max-sm:hidden'>
                         {row.map((row, index) => (
-                          <div className='flex ' key={index}>
-                            {index >= 7 && (
-                              <div
-                                className={`${
-                                  newForm.seat.includes(`${column}${row}`)
-                                    ? "bg-primary"
-                                    : "bg-[#D6D8E7]"
-                                } w-[26px] h-[26px] mx-2 my-2 rounded-sm `}
-                                onClick={() =>
-                                  setNewForm((form) => {
-                                    let newSeat = []
-                                    const checkSeat = form.seat?.includes(
-                                      `${column}${row}`
-                                    )
-                                    if (checkSeat) {
-                                      newSeat = form.seat.filter(
-                                        (seat) => seat !== `${column}${row}`
-                                      )
-                                    } else {
-                                      newSeat = [
-                                        ...form.seat,
-                                        `${column}${row}`,
-                                      ]
-                                    }
-                                    return { ...form, seat: newSeat }
-                                  })
-                                }
-                              ></div>
+                          <>
+                            {index < 7 && (
+                              <div className='text-center w-[26px] h-[26px] mx-2 my-2'>
+                                {row}
+                              </div>
                             )}
-                          </div>
+                          </>
                         ))}
                       </div>
-                    ))}
-                    {/* <div className='flex '>
-                      {row.map((row, index) => (
-                        <div className='flex' key={index}>
-                          {index >= 7 && (
-                            <div className='w-[26px] h-[26px] mx-2 my-2 rounded-sm flex justify-center items-center'>
-                              {row}
+                      <div className='border-b border-[#ED2E7E] mt-2 mx-2 sm:hidden'></div>
+                    </div>
+                    <div className='mt-[26px]'>
+                      {column.map((column, index) => (
+                        <div className='flex'>
+                          {row.map((row, index) => (
+                            <div className=''>
+                              {index >= 7 && (
+                                <div
+                                  className={`${
+                                    newForm.seat.includes(`${column}${row}`)
+                                      ? "bg-primary"
+                                      : "bg-[#D6D8E7]"
+                                  } w-[26px] h-[26px] mx-2 my-2 rounded-sm `}
+                                  onClick={() =>
+                                    setNewForm((form) => {
+                                      let newSeat = []
+                                      const checkSeat = form.seat?.includes(
+                                        `${column}${row}`
+                                      )
+                                      if (checkSeat) {
+                                        newSeat = form.seat.filter(
+                                          (seat) => seat !== `${column}${row}`
+                                        )
+                                      } else {
+                                        newSeat = [
+                                          ...form.seat,
+                                          `${column}${row}`,
+                                        ]
+                                      }
+                                      return { ...form, seat: newSeat }
+                                    })
+                                  }
+                                ></div>
+                              )}
                             </div>
-                          )}
+                          ))}
                         </div>
                       ))}
-                    </div> */}
+                      <div className='flex max-sm:hidden'>
+                        {row.map((row, index) => (
+                          <>
+                            {index >= 7 && (
+                              <div className='text-center w-[26px] h-[26px] mx-2 my-2'>
+                                {row}
+                              </div>
+                            )}
+                          </>
+                        ))}
+                      </div>
+                      <div className='border-b border-[#ED2E7E] mt-2 mx-2 sm:hidden'></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -273,7 +279,7 @@ const OrderMovie = () => {
                   </p>
                 </div>
               </div>
-              <div className='flex gap-5 mt-5'>
+              <div className='flex gap-5 mt-5 max-sm:justify-between'>
                 <select
                   name=''
                   id=''

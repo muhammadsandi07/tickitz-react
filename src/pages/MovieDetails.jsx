@@ -32,8 +32,6 @@ const MovieDetails = () => {
     const getAllMovie = async (id) => {
       try {
         const dataMovie = await getMovieDetails(id)
-        console.log(dataMovie, "ini data movie")
-
         setMovie(dataMovie)
       } catch (error) {
         console.log(error)
@@ -268,7 +266,7 @@ const MovieDetails = () => {
               </div>
             </div>
 
-            <div className=' md:hidden py-[7px] border border-[#dedede] rounded-xl px-[17px] pt-[12px] pb-[41px] '>
+            <div className=' md:hidden py-[7px] border border-[#dedede] rounded-xl px-[17px] pt-[12px] mt-4 '>
               <div
                 className={`${
                   showTime ? "border-b border-[#dedede] " : "border-0"
@@ -276,7 +274,7 @@ const MovieDetails = () => {
               >
                 <img src={evbId} alt='' />
                 <div className='flex justify-between items-center'>
-                  <p className='text-2xl font-bold tracking-[1px] leading-11'>
+                  <p className='text-2xl font-bold tracking-[1px] leading-11 text-[#121212] text-2xl font-bold leading-11 visible'>
                     EBV.id
                   </p>
                   <img
@@ -286,13 +284,13 @@ const MovieDetails = () => {
                     className={!showTime ? " rotate-180" : ""}
                   />
                 </div>
-                <p className='text-[12px] leading-[18px] tracking-[0.75px] font-[300] text-[#6E7191] w-[207px]'>
+                <p className='text-[12px] leading-[18px] tracking-[0.75px] font-[300] text-[#6E7191] w-[207px] visible mb-4'>
                   Whatever street No.12, South Purwokerto
                 </p>
               </div>
               <div className={showTime ? "block" : "hidden"}>
                 <div>
-                  <div className='grid grid-cols-[100px_100px] gap-5'>
+                  <div className='grid grid-cols-[100px_100px] gap-5 mt-3'>
                     {timeList.map((time, index) => (
                       <div key={index}>
                         <BtnTime

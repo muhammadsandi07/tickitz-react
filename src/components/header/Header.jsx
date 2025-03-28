@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import company from "../../assets/company/tickitz.svg"
+import companyMobile from "../../assets/company/tickitzMobile.svg"
 import hamburger from "../../assets/icon/hamburger-menu.svg"
 import search from "../../assets/icon/search.svg"
 import profile from "../../assets/profile/user-circle.png"
@@ -9,7 +10,6 @@ import { userContext } from "../../contexts/userContext"
 const Header = () => {
   const { user, setUser } = useContext(userContext)
   const [show, setShow] = useState(false)
-  console.log(show)
   useEffect(() => {
     setShow(false)
   }, [])
@@ -20,9 +20,9 @@ const Header = () => {
           <img
             src={company}
             alt='company logo'
-            className='w-[130px] h-[51px]'
+            className='w-[130px] h-[51px] max-sm:hidden'
           />
-          <img src='images/Tickitz.svg' alt='' />
+          <img src={companyMobile} alt='' className='sm:hidden' />
         </div>
         <nav className='max-md:hidden md:flex gap-14'>
           <Link to={"/"}>
@@ -37,7 +37,7 @@ const Header = () => {
         </nav>
         {user.email && user.password ? (
           <div>
-            <div className='max-sm:hidden sm:flex '>
+            <div className='max-sm:hidden sm:flex gap-2 '>
               <select name='' id=''>
                 <option value=''>location</option>
               </select>

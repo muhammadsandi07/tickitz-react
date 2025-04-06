@@ -37,12 +37,11 @@ const SignUp = () => {
     })
     setForm(newFrom)
   }
-  const [existingUsers, _] = useLocalStorage("fgo23:listUser", []) || []
 
   const handleRegister = (e) => {
     e.preventDefault()
     let isValid = true
-    const isEmailExist = existingUsers.some((user) => user.email === form.email)
+    const isEmailExist = listUser.some((user) => user.email === form.email)
 
     if (isEmailExist) {
       setErrors({ ...errors, email: "email sudah terdaftar" })
